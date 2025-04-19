@@ -26,28 +26,79 @@
 ### Back (/back)
 ```
 src/
-├── config/           # Config DB, Cloudinary
-├── controllers/      # Logique métier
-├── models/           # Schémas MongoDB
-├── routes/           # Endpoints API
-├── services/         # Email, Upload
-├── utils/            # JWT, Validateurs
-├── app.js            # Config Express
-└── server.js         # Lancement
+├── config/
+│   ├── db.js               # Connexion MongoDB
+│   ├── cloudinary.js       # Config upload
+│   └── redis.js           # Cache Redis
+├── controllers/
+│   ├── admin/              # Backoffice
+│   │   ├── dashboard.js
+│   │   ├── products.js
+│   │   └── users.js
+│   ├── cartController.js   # Gestion panier
+│   ├── orderController.js  # Process commande
+│   └── authController.js   # Auth/OAuth
+├── models/
+│   ├── Product.js          # Schéma produit
+│   ├── User.js             # Profils utilisateurs
+│   ├── Order.js            # Commandes
+│   └── Review.js           # Avis clients
+├── routes/
+│   ├── api/
+│   │   ├── v1/             # Versioning API
+│   │   └── admin/          # Routes protégées
+│   └── auth.js             # Auth routes
+├── services/
+│   ├── email/              # Templates transactionnels
+│   ├── payment/            # Intégration Stripe
+│   └── upload/             # Middleware Multer
+├── utils/
+│   ├── auth/               # JWT/OAuth
+│   ├── validators/         # Schemas JOI
+│   └── errorHandlers.js    # Custom errors
+├── app.js                  # Middlewares
+└── server.js               # Lancement
 ```
 ### Front (/front)
 ```
 src/
-├── assets/ 
-├── components/      # Composants réutilisables
-├── features/        # Par fonctionnalité
-|   ├── admin/       # Admin
-│   ├── auth/        # Authentification
-│   ├── cart/        # Panier
-│   └── products/    # Gestion produits
-├── hooks/           # Custom hooks
-├── pages/           # Pages Next.js
-├── store/           # Redux Toolkit
-├── styles/          # CSS modulaire
-└── utils/           # Helpers, constants
+├── assets/
+│   ├── fonts/              # Polices custom
+│   ├── icons/              # SVG sprites
+│   └── scss/
+│       ├── _variables.scss # Design tokens
+│       └── main.scss       # Global styles
+├── components/
+│   ├── ui/
+│   │   ├── ProductCard/    # Card with hover effects
+│   │   ├── SizeSelector/   # Interactive size picker
+│   │   └── ColorSwatch/    # Color selector
+│   └── layout/
+│       ├── MainNav/        # Mega menu
+│       └── Footer/         # Multi-column
+├── features/
+│   ├── product/
+│   │   ├── ProductGallery/ # Image carousel
+│   │   ├── VariantPicker/  # Size/color combo
+│   │   └── api/           # RTK Query endpoints
+│   ├── cart/
+│   │   ├── CartDrawer/     # Slide-in cart
+│   │   └── CheckoutSteps/  # 3-step process
+│   └── auth/
+│       ├── OAuthProviders/ # Social logins
+│       └── ProfileForm/    # Editable form
+├── pages/
+│   ├── Product/
+│   │   ├── [slug].jsx      # Dynamic route
+│   │   └── Collection.jsx  # Filtered view
+│   └── Account/
+│       ├── Orders.jsx      # Order history
+│       └── Wishlist.jsx    # Saved items
+├── store/
+│   ├── slices/             # Redux state
+│   │   ├── cartSlice.js    # Cart operations
+│   │   └── uiSlice.js      # Modals/loading
+│   └── hooks.js            # Typed selectors
+├── App.jsx                 # Providers
+└── main.jsx                # Entry point
 ```
